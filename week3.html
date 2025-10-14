@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 3: Design Thinking Process | Dominic-Majak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --gray-light: #f8f9fa;
+            --gray-medium: #e9ecef;
+            --gray-dark: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fafb;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #1a2530);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Main Content Styles */
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-dark);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+
+        .card-icon {
+            background: var(--secondary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        /* Process Steps */
+        .process-step {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Empathy Map */
+        .empathy-map {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .empathy-map {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .empathy-quadrant {
+            background: var(--gray-light);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .quadrant-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .quadrant-title i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* Idea Grid */
+        .idea-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .idea-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            border-top: 3px solid var(--secondary);
+        }
+
+        .idea-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .idea-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Concept Visualization */
+        .concept-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--gray-light);
+            border-radius: var(--border-radius);
+        }
+
+        .concept-image {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .concept-features {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .feature-list {
+            list-style-type: none;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-medium);
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li i {
+            color: var(--success);
+            margin-right: 0.75rem;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-toggle {
+            background: none;
+            border: none;
+            color: var(--gray-dark);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .nav-list {
+            list-style-type: none;
+        }
+
+        .nav-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .nav-list a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .nav-list a:hover {
+            background: var(--gray-light);
+            color: var(--secondary);
+        }
+
+        .nav-list a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-title i {
+            margin-right: 0.75rem;
+        }
+
+        .summary-list {
+            list-style-type: none;
+        }
+
+        .summary-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .summary-list li:before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .highlight {
+            background: var(--warning);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--gray-light);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--secondary);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: var(--gray-dark);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">UniPod SSD | <span>Dominic-Majak</span></a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="week1.html">Week 1</a>
+                    <a href="week2.html">Week 2</a>
+                    <a href="week3.html" class="active">Week 3</a>
+                    <a href="week4.html">Week 4</a>
+                    <a href="projects.html">Projects</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="mb-2">
+            <h1 class="page-title">Week 3: Design Thinking Process</h1>
+            <p class="page-subtitle">Date: 7th Oct 2025 - 13th Oct 2025 | Human-Centered Problem Solving</p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Main Content -->
+            <main>
+                <!-- Quick Summary -->
+                <div class="summary-box">
+                    <h2 class="summary-title"><i class="fas fa-info-circle"></i> Process Overview</h2>
+                    <ul class="summary-list">
+                        <li><strong>Focus:</strong> Solving navigation safety issues for Nile boat operators</li>
+                        <li><strong>Methodology:</strong> 5-stage Design Thinking process</li>
+                        <li><strong>Outcome:</strong> "Port of Safety" checkpoint concept</li>
+                        <li><strong>Key Insight:</strong> Economic pressures and environmental constraints create dangerous conditions</li>
+                    </ul>
+                </div>
+
+                <!-- Problem Space Section -->
+                <section id="problem-space" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h2 class="card-title">The Problem Space</h2>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="step-title"><span class="step-number">1</span> Identify the Challenge</h3>
+                        <p>The system of overloaded, long-distance passenger boats traveling on the Nile at night presents significant safety risks for operators and passengers alike.</p>
+                        <div class="tags mt-2">
+                            <span class="tag">Safety</span>
+                            <span class="tag">Navigation</span>
+                            <span class="tag">Overloading</span>
+                            <span class="tag">Night Travel</span>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="step-title"><span class="step-number">2</span> Empathize with Users</h3>
+                        <p>Through synthesized interviews and observations, we developed a deep understanding of the boat operators' experiences and challenges.</p>
+                        
+                        <blockquote class="quote">
+                            "A boat operator. The trip is 48 hours. I must travel at night. If I don't carry extra people and goods, I don't make a profit. But when I use my bright white light to see, it blinds me and others because it reflects off the water. We are all navigating blind."
+                        </blockquote>
+                        
+                        <h4 class="mb-1">Empathy Map for a Typical Boat Operator:</h4>
+                        <div class="empathy-map">
+                            <div class="empathy-quadrant">
+                                <h5 class="quadrant-title"><i class="fas fa-comment"></i> Says</h5>
+                                <ul>
+                                    <li>"The light just makes a white wall."</li>
+                                    <li>"I need to carry more to earn more."</li>
+                                    <li>"We navigate by memory and sound."</li>
+                                </ul>
+                            </div>
+                            <div class="empathy-quadrant">
+                                <h5 class="quadrant-title"><i class="fas fa-brain"></i> Thinks</h5>
+                                <ul>
+                                    <li>"This is dangerous, but I have no choice."</li>
+                                    <li>"I cannot see other boats until we are too close."</li>
+                                    <li>"The system forces me to take risks."</li>
+                                </ul>
+                            </div>
+                            <div class="empathy-quadrant">
+                                <h5 class="quadrant-title"><i class="fas fa-heart"></i> Feels</h5>
+                                <ul>
+                                    <li>Trapped by economic necessity</li>
+                                    <li>Constant stress and anxiety</li>
+                                    <li>Fearful of causing an accident</li>
+                                </ul>
+                            </div>
+                            <div class="empathy-quadrant">
+                                <h5 class="quadrant-title"><i class="fas fa-running"></i> Does</h5>
+                                <ul>
+                                    <li>Turns lights off to reduce glare</li>
+                                    <li>Overloads the boat for profitability</li>
+                                    <li>Navigates by memory and sound</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="step-title"><span class="step-number">3</span> Define the Problem</h3>
+                        <p>Based on our empathy work, we formulated a clear problem statement:</p>
+                        <div class="card" style="background: #e8f4fc; border-left: 4px solid var(--secondary);">
+                            <p><strong>Problem Statement:</strong> Boat operators and passengers need a way to travel safely on the 48-hour journey without the risk of collision or sinking because boats are overloaded to be profitable and traditional white lights create a dangerous glare on the water, hiding other vessels.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Solution Sprint Section -->
+                <section id="solution-sprint" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h2 class="card-title">The Solution Sprint</h2>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="step-title"><span class="step-number">4</span> Ideate Solutions</h3>
+                        <p>Using brainstorming techniques, we generated a wide range of potential solutions to address the identified problems.</p>
+                        
+                        <div class="idea-grid">
+                            <div class="idea-card">
+                                <h5 class="idea-title">Amber & Red Lights</h5>
+                                <p>Use non-glare-colored lights for night visibility that don't reflect off water.</p>
+                            </div>
+                            <div class="idea-card">
+                                <h5 class="idea-title">Painted Load Line</h5>
+                                <p>A mandatory waterline mark on every boat to indicate maximum capacity.</p>
+                            </div>
+                            <div class="idea-card">
+                                <h5 class="idea-title">Port Weigh Station</h5>
+                                <p>A scale to check boat weight before departure to prevent overloading.</p>
+                            </div>
+                            <div class="idea-card">
+                                <h5 class="idea-title">Underwater Acoustic Pingers</h5>
+                                <p>Devices that make boats "hear" each other in low visibility conditions.</p>
+                            </div>
+                            <div class="idea-card">
+                                <h5 class="idea-title">Radar Reflectors</h5>
+                                <p>Passive devices to make boats show up on radar systems.</p>
+                            </div>
+                            <div class="idea-card">
+                                <h5 class="idea-title">Community Safety Certification</h5>
+                                <p>A flag system for boats that follow safety protocols.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="step-title"><span class="step-number">5</span> Concept Development</h3>
+                        <p>We selected the three most promising ideas and developed them into detailed concepts with annotated sketches.</p>
+                        
+                        <div class="card mb-2">
+                            <h4>Concept 1: The "Night-Vision" Boat Kit</h4>
+                            <p class="mb-1">"This integrated solution directly prevents overloading and enables safe night vision without glare."</p>
+                            
+                            <div class="concept-visual">
+                                <div class="image-container" style="width: 100%; height: 250px; border-radius: 8px; margin-bottom: 1rem; overflow: hidden; position: relative;">
+    <img src="C:\Users\DELL\Documents\Dominic-UniPod\images\week3\image1.jpg" 
+         alt="Night-Vision Boat Kit Concept Sketch" 
+         style="width: 100%; height: 100%; object-fit: cover;"
+         onerror="this.style.display='none'; document.getElementById('placeholder').style.display='flex';">
+    
+    <div id="placeholder" class="placeholder-image" style="width: 100%; height: 100%; background: #f0f0f0; display: none; align-items: center; justify-content: center; color: #666; position: absolute; top: 0; left: 0;">
+        <div class="text-center">
+            <i class="fas fa-image fa-3x mb-2"></i>
+            <p>Night-Vision Boat Kit Concept Sketch</p>
+        </div>
+    </div>
+</div>
+                                
+                                <div class="concept-features">
+                                    <h5>Key Features:</h5>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-check-circle"></i> Amber-colored navigation lights to reduce glare</li>
+                                        <li><i class="fas fa-check-circle"></i> Integrated load monitoring system</li>
+                                        <li><i class="fas fa-check-circle"></i> Solar-powered for sustainability</li>
+                                        <li><i class="fas fa-check-circle"></i> Water-resistant design for marine environment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-2">
+                            <h4>Concept 2: The "Port of Safety" Checkpoint</h4>
+                            <p class="mb-1">"Procedural solution: 1. Verify weight 2. Inspect lights 3. Certify departure."</p>
+                            
+                            <div class="concept-visual">
+                                
+                                
+                                <div class="concept-features">
+                                    <h5>Verification Steps:</h5>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-weight-hanging"></i> Weight verification at digital scale</li>
+                                        <li><i class="fas fa-lightbulb"></i> Light inspection for proper amber/red lighting</li>
+                                        <li><i class="fas fa-certificate"></i> Safety certification issuance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h4>Concept 3: The "Acoustic Awareness" System</h4>
+                            <p class="mb-1">"Non-visual backup system. Works in all weather and light conditions."</p>
+                            
+                            <div class="concept-visual">
+                                
+                                
+                                <div class="concept-features">
+                                    <h5>System Components:</h5>
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-wave-square"></i> Underwater acoustic transmitters</li>
+                                        <li><i class="fas fa-headphones"></i> Directional audio receivers</li>
+                                        <li><i class="fas fa-bell"></i> Proximity alert system</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h3 class="step-title"><span class="step-number">6</span> Selected Concept</h3>
+                        <p>After evaluating all concepts against feasibility, desirability, and viability criteria, we selected:</p>
+                        
+                        <div class="card" style="background: #e8f6ef; border-left: 4px solid var(--success);">
+                            <h4>Concept 2: The "Port of Safety" Checkpoint</h4>
+                            <p><strong>Justification:</strong> This is the most viable and feasible solution because it creates a single, enforceable point of control that systematically prevents overloading and mandates the use of non-glare lights, directly addressing both root causes of the problem.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reflection Section -->
+                <section id="reflection" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h2 class="card-title">Process Reflection</h2>
+                    </div>
+                    
+                    <div class="process-step">
+                        <p>This task was a powerful demonstration of how a structured design thinking process can untangle a complex, real-world problem and generate human-centered, practical solutions.</p>
+                        
+                        <p>The process revealed that what initially appeared as simple "annoying boats" was actually a complex system of economic pressures (overloading) and environmental constraints (glare) that create dangerous conditions.</p>
+                        
+                        <p>In conclusion, the ultimate value of this process was its ability to reframe the problem from a technical issue to a systemic one. The final proposed solution—a <span class="highlight">mandatory safety certification combining non-glare lights and load checks</span>—is compelling not because it's high-tech, but because it is <span class="highlight">feasible, desirable, and directly addresses the nuanced root causes</span> we uncovered.</p>
+                        
+                        <p>This approach demonstrates how design thinking moves beyond assumptions to create solutions that are both intelligent and deeply empathetic to the people they serve.</p>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="nav-card">
+                    <h3 class="nav-title">
+                        On This Page
+                        <button class="nav-toggle" id="navToggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </h3>
+                    <ul class="nav-list" id="pageNav">
+                        <li><a href="#problem-space"><i class="fas fa-search"></i> Problem Space</a></li>
+                        <li><a href="#solution-sprint"><i class="fas fa-lightbulb"></i> Solution Sprint</a></li>
+                        <li><a href="#reflection"><i class="fas fa-clipboard-check"></i> Reflection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-card">
+                    <h3 class="nav-title">Design Thinking Phases</h3>
+                    <ul class="nav-list">
+                        <li><a href="#"><i class="fas fa-search"></i> Empathize</a></li>
+                        <li><a href="#"><i class="fas fa-pencil-alt"></i> Define</a></li>
+                        <li><a href="#"><i class="fas fa-lightbulb"></i> Ideate</a></li>
+                        <li><a href="#"><i class="fas fa-palette"></i> Prototype</a></li>
+                        <li><a href="#"><i class="fas fa-vial"></i> Test</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-card">
+                    <h3 class="nav-title">Key Outcomes</h3>
+                    <ul class="nav-list">
+                        <li><a href="#"><i class="fas fa-map"></i> Empathy Map</a></li>
+                        <li><a href="#"><i class="fas fa-bullseye"></i> Problem Statement</a></li>
+                        <li><a href="#"><i class="fas fa-th-list"></i> 10+ Ideas Generated</a></li>
+                        <li><a href="#"><i class="fas fa-star"></i> 3 Concepts Developed</a></li>
+                        <li><a href="#"><i class="fas fa-flag-checkered"></i> Final Solution</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Dominic-Majak | Design Thinking Process Documentation</p>
+                <div class="social-links">
+                    <a href="https://github.com/majakdengadol11-cpu"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/Dominic Majak"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:majakdengadol11@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation toggle functionality
+        document.getElementById('navToggle').addEventListener('click', function() {
+            const navList = document.getElementById('pageNav');
+            const icon = this.querySelector('i');
+            
+            if (navList.style.display === 'none') {
+                navList.style.display = 'block';
+                icon.className = 'fas fa-chevron-down';
+            } else {
+                navList.style.display = 'none';
+                icon.className = 'fas fa-chevron-right';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add active class to navigation items when scrolling
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-list a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
